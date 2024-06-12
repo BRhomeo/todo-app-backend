@@ -42,6 +42,7 @@ declare global {
   interface SignIn {
     email: string;
     password: string;
+    returnSecureToken?: boolean;
   }
   interface SignUp extends SignIn {
     name: string;
@@ -53,11 +54,24 @@ declare global {
   }
 
   interface User extends AbstractDto {
+    id: string;
     email: string;
     name: string;
     totalTasks?: number;
   }
 
+  interface Token {
+    idToken: string;
+    refreshToken: string;
+    expiresIn: number;
+  }
+  interface RefreshToken {
+    grant_type: "refresh_token";
+    refresh_token: string;
+  }
+  interface SignOut {
+    idToken: string;
+  }
   // FB util types
   interface OrderBy {
     field: string;

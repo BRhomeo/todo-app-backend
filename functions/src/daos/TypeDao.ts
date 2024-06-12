@@ -19,6 +19,22 @@ export default class TypeDao<T extends AbstractDto> extends AbsractDao<T> {
     return this._collectionName;
   }
 
+  public async get(
+    id: string,
+    collection: string | null
+  ): Promise<T | Error | undefined> {
+    try {
+      const doc = await FirebaseUtil.getFirestoreInstance<T>(
+        (collection || this.getCollectionName()) as string
+      ).get(id);
+      if (!doc) {
+        return new Error("Document by this id isn't exists");
+      }
+      return Promise.resolve(doc);
+    } catch (error: any | Error) {
+      return Promise.reject(error);
+    }
+  }
   public async set(
     currentUser: CurrentUser,
     id: string,
@@ -93,9 +109,7 @@ export default class TypeDao<T extends AbstractDto> extends AbsractDao<T> {
   }
 
   public async getAll(
-    currentUser: CurrentUser,
-    requestOptions: RequestOptions | null | undefined,
-    collection?: string | null
+    requestOptions: RequestOptions | null | undefined
   ): Promise<Error | T[]> {
     try {
       const ref = FirebaseUtil.getFirestoreInstance(
