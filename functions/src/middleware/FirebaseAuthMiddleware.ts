@@ -1,11 +1,4 @@
-import { AdminPermission } from "./../dto/enum/AdminPermission";
 import express from "express";
-import { DocumentData } from "firebase-admin/firestore";
-import AdminProfile from "../dto/admin/AdminProfile";
-import CurrentUser from "../dto/auth/CurrentUser";
-import User from "../dto/common/User";
-import { UserType } from "../dto/enum/UserType";
-import { Collection } from "../util/Collection";
 import FirebaseUtil from "../util/FirebaseUtil";
 
 export default class FirebaseAuthMiddleware {

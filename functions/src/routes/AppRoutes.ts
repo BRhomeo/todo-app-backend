@@ -1,13 +1,11 @@
 import CommonRoutesConfig from "../common/CommonRoutesConfig";
 import TODOController from "../controllers/TODOController";
-// import BellaaController from "../controllers/BellaaController";
 import FirebaseAuthMiddleware from "../middleware/FirebaseAuthMiddleware";
-// import ForbidDelete from "../middleware/ForbidDelete"; we could set this to forbid delete
 import { RouteItem } from "./RoutesBuilder";
-const bellaaController = new BellaaController();
-export default class BellaaRoutes extends CommonRoutesConfig {
+const todoController = new TODOController();
+export default class AppRoutes extends CommonRoutesConfig {
   constructor() {
-    super("BellaaRoutes");
+    super("appController");
   }
 
   public configureRoutes(): Array<RouteItem> {
@@ -17,28 +15,28 @@ export default class BellaaRoutes extends CommonRoutesConfig {
       path: "/todo",
       method: "post",
       middleware: middlewareArr,
-      handler: [TODOController.setTODO],
+      handler: [todoController.setTODO],
     } as RouteItem;
 
     const getTODOList = {
       path: "/todo",
       method: "get",
       middleware: middlewareArr,
-      handler: [TODOController.getTODOList],
+      handler: [todoController.getTODOList],
     } as RouteItem;
 
     const deleteTODO = {
-      path: "/todo",
+      path: "/todo/:id",
       method: "delete",
       middleware: middlewareArr,
-      handler: [TODOController.deleteTODO],
+      handler: [todoController.deleteTODO],
     } as RouteItem;
 
     const updateTODO = {
-      path: "/todo",
+      path: "/todo/:id",
       method: "put",
       middleware: middlewareArr,
-      handler: [TODOController.updateTODO],
+      handler: [todoController.updateTODO],
     } as RouteItem;
 
     return [setTODO, getTODOList, deleteTODO, updateTODO] as Array<RouteItem>;
