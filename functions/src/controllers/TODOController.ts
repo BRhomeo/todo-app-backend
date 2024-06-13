@@ -4,6 +4,11 @@ import express from "express";
 import TODOService from "../services/TODOService";
 import TemplatesHelper from "../util/TemplatesHelper";
 
+enum TODOStatus {
+  ACTIVE = "active",
+  COMPLETED = "completed",
+  DELETED = "deleted",
+}
 export default class TODOController {
   private todoService = new TODOService();
 

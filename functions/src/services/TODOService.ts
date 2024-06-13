@@ -20,7 +20,7 @@ export default class TODOService<T extends AbstractDto> extends TypeDao<T> {
       if (result instanceof Error) {
         throw result;
       }
-      await FirebaseUtil.getFirestoreInstance<DocumentData>("user").save(
+      await FirebaseUtil.getFirestoreInstance<DocumentData>("user").update(
         currentUser,
         {
           totalTasks: FieldValue.increment(1),
@@ -100,7 +100,7 @@ export default class TODOService<T extends AbstractDto> extends TypeDao<T> {
       }
       const result = await FirebaseUtil.getFirestoreInstance<DocumentData>(
         "todo"
-      ).save(currentUser, data, data.id);
+      ).update(currentUser, data, data.id);
       if (result instanceof Error) {
         throw result;
       }
