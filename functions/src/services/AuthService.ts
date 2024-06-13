@@ -48,8 +48,12 @@ export class AuthService {
         token: result.data.idToken,
         refreshToken: result.data.refreshToken,
         expiresIn: result.data.expiresIn,
-        email: result.data.email,
-        userCreated: userDoc ? true : false,
+        user: {
+          id: result.data.localId,
+          email: result.data.email,
+          userCreated: userDoc ? true : false,
+          name: data.name,
+        },
       });
     } catch (error: any | Error) {
       return Promise.reject(error);
